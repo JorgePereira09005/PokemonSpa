@@ -18,43 +18,35 @@ export class PokedexScreenComponent implements OnInit {
   constructor(private finderService: PokemonFinderService,
               private route: ActivatedRoute,
               private router: Router,
-              private sanitizer:DomSanitizer) {
-    
-    /* this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };  */             
+              private sanitizer:DomSanitizer) {           
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe( ()=> {
 
       const pokemonName: string = this.route.snapshot.paramMap.get('name');
-      /* const pokemonName: string = ""; */
+      console.log(pokemonName + ' this pokemon loading');
 
-      console.log(this.router.url);
-
-      if(!pokemonName) {
+      if(pokemonName == null) {
         this.getRandomPokemon();
       } else {
         this.getPokemonByName(pokemonName);
       }
 
-      setTimeout( ()=> {
+      /* setTimeout( ()=> {
         this.getEvolvesFrom();
         this.getRelatedTo();
-      }, 1000);
-    } )
+      }, 1000); */
+    })
 
-    console.log(this.pokemon);
   }
 
   getPokemonByName(name: string) {
 
+    console.log('before subscribing and receving data ' + name);
     this.finderService.getPokemonByName(name).subscribe(
       data => {
-
-        
-
+        console.log('after subscribing and receving data ' + data.name);
         this.pokemon.name = data.name;
         this.pokemon.id = data.id;
 
@@ -74,7 +66,8 @@ export class PokedexScreenComponent implements OnInit {
 
   getRandomPokemon() {
 
-    const randomId: number = Math.floor(Math.random() * 800) + 1; 
+    console.log('inside this.getRandomPokemon()')
+    const randomId: number = Math.floor(Math.random() * 807) + 1; 
 
     this.finderService.getPokemonById(randomId).subscribe(
       data => {
@@ -104,7 +97,6 @@ export class PokedexScreenComponent implements OnInit {
   }
 
   getRelatedTo(): void {
-
     this.finderService.getRelatedTo(this.pokemon.id).subscribe(
       data => {
         try {
@@ -127,6 +119,31 @@ export class PokedexScreenComponent implements OnInit {
       this.router.navigateByUrl(`/${name}`);
     }
     
+  }
+
+  getPrevious() {
+
+    if (this.pokemon.id -1 >= 0) {
+      const id:number = this.pokemon.id - 1;
+
+      this.finderService.getPokemonByName(`bulbasaur`).subscribe(
+        data => {
+          this.router.navigateByUrl(`/${id}`);
+        }
+      )
+    }
+  }
+
+  getNext() {
+    if (this.pokemon.id + 1 <= 807) {
+      const id:number = this.pokemon.id + 1;
+
+      this.finderService.getPokemonByName(`bulbasaur`).subscribe(
+        () => {
+          this.router.navigateByUrl(`/${id}`);
+        }
+      )
+    }
   }
 
 }

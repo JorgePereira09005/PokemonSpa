@@ -1,14 +1,8 @@
-<!-- <style>
-    div {
-      background-color: lightgray;
-    }
-</style> -->
 
-<!-- parte de cima -->
-<div class="container text-center" style="position: absolute; top: 10%; left: 37%; width: 25%">
-    <h6>{{this.pokemon.name}} (ID: {{this.pokemon.id}})</h6>
+<div id="screen1" class=" text-center " style=" position: absolute; top: 125px; left: 364px; width: 400px " >
+    <h5 style="color: white">{{this.pokemon.name}} (ID: {{this.pokemon.id}})</h5>
 
-    <div class="row ">
+    <div  class="row" style="align-items: center; width: 100%; color: white; " >
 
         <div class="col-sm">
             <img [src]="this.pokemon.front_default" >
@@ -19,7 +13,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style=" align-items: center; width: 100%; color: white;">
         <div class="col-sm">
             <img [src]="this.pokemon.back_default" >
         </div>
@@ -31,10 +25,8 @@
 
 </div>
 
-<br>
 
-<!-- parte de baixo -->
-<div class="container text-center w-25">
+<div id="screen2" class="text-center" style=" position: absolute; top: 535px; left: 365px; width: 400px ">
 
     <div class="row ">
         <div class="col-sm">
@@ -61,13 +53,22 @@
 
     </div>
 
-    <div class="row" >
+    <div class="row" style="position: absolute; top: 180px; left: 100px; width: 400px" >
             <input #pokemonName type="text" placeholder="Type name and press enter" 
             (keyup.enter)="onSubmit(pokemonName.value)"/>
+            
     </div>
 
-    <button (click)="onSubmit('')" class="au-btn-submit">
+    <button (click)="getPrevious()" type="button" class ="btn btn-danger" style="position: absolute; top: 215px; left: 15px; width: 100px; " (click)="onSubmit('')" class="au-btn-submit">
+        Previous
+    </button>
+
+    <button type="button" style="position: absolute; top: 215px; left: 125px; width: 125px" (click)="onSubmit('')" class="au-btn-submit">
         Random!
+    </button>
+
+    <button (click)="getNext()" type="button" class ="btn btn-danger" style="position: absolute; top: 215px; left: 262px; width: 100px" (click)="onSubmit('')" class="au-btn-submit">
+        Next
     </button>
 
 </div>

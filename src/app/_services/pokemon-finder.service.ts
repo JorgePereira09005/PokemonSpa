@@ -13,6 +13,7 @@ export class PokemonFinderService {
 
   getPokemonByName(name: string): Observable<any> {
     const lowerCaseName = name.toLowerCase();
+    console.log('insde getPokemonByName -> lowercasename: ' + lowerCaseName);
     const url = this.baseUrl + `pokemon/${lowerCaseName}`;
     return this.httpClient.get(url);
   }
