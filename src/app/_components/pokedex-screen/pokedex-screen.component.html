@@ -1,0 +1,73 @@
+<!-- <style>
+    div {
+      background-color: lightgray;
+    }
+</style> -->
+
+<!-- parte de cima -->
+<div class="container text-center" style="position: absolute; top: 10%; left: 37%; width: 25%">
+    <h6>{{this.pokemon.name}} (ID: {{this.pokemon.id}})</h6>
+
+    <div class="row ">
+
+        <div class="col-sm">
+            <img [src]="this.pokemon.front_default" >
+        </div>
+
+        <div class="col-sm">
+            Height: {{this.pokemon.height/10}}m
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <img [src]="this.pokemon.back_default" >
+        </div>
+
+        <div class="col-sm">
+            Weight: {{this.pokemon.weight/10}}kg
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<!-- parte de baixo -->
+<div class="container text-center w-25">
+
+    <div class="row ">
+        <div class="col-sm">
+            <b>Stats</b>
+        </div>
+        <div class="col-sm">
+            <b>Type</b>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-sm">
+            <div *ngFor="let tempStat of this.pokemon.stats"> 
+                {{tempStat.stat.name}}-{{tempStat.base_stat}}
+            </div>    
+        </div>
+
+        <div class="col-sm">
+            <div *ngFor="let tempType of this.pokemon.types"> 
+                {{tempType.type.name}}
+            </div>    
+        </div>
+
+    </div>
+
+    <div class="row" >
+            <input #pokemonName type="text" placeholder="Type name and press enter" 
+            (keyup.enter)="onSubmit(pokemonName.value)"/>
+    </div>
+
+    <button (click)="onSubmit('')" class="au-btn-submit">
+        Random!
+    </button>
+
+</div>
